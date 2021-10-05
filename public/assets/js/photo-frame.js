@@ -14,6 +14,10 @@ $("#save").on("click", function () {
     submitPhoto();
 });
 
+let canvasimgWidth = $(".canvasimg").width(),
+    canvasimgHeight = $(".canvasimg").height();
+
+console.log(canvasimgWidth, canvasimgHeight);
 function readURL(input) {
     if (input.files && input.files[0]) {
         $("#save").attr("disabled", false);
@@ -35,9 +39,9 @@ function createCanvas(base64) {
     let image = new Image();
     image.src = base64;
     image.onload = function () {
-        ctx.drawImage(frame, 0, 0, 300, 150);
-        ctx.drawImage(image, 43, 19, 214, 112);
-        ctx.drawImage(map, 25, 100, 25, 30);
+        ctx.drawImage(frame, 0, 0, 764.5, 882.3);
+        ctx.drawImage(image, 110, 110, 544.3, 662);
+        ctx.drawImage(map, 28, 606, 269.382, 256.192);
     };
 
     $(".canvasimg").css("display", "none");
