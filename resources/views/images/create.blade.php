@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="/assets/fonts/fonts.css">
     <link rel="stylesheet" href="/assets/css/style.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 
     <title>U4P</title>
 </head>
@@ -37,7 +39,7 @@
                 <img src="/assets/images/gallery-btn.svg" class="img-fluid" alt="">
             </button>
         </div>
-        <button class="btn save-btn">
+        <button class="btn save-btn" id="save">
             <img src="/assets/images/save-btn.svg" class="img-fluid" alt="">
         </button>
 
@@ -50,9 +52,9 @@
 
 </div>
 
-<input type="file" name="camera_input" style="visibility: hidden" id="camera-input" capture="user">
-<input type="file" name="gallery_input" style="visibility: hidden" id="gallery-input">
-
+<input type="file" name="camera_input" style="visibility: hidden" id="camera-input" class="image-uploader" capture="user">
+<input type="file" name="gallery_input" style="visibility: hidden" id="gallery-input" class="image-uploader">
+<img src="/assets/images/frame.png" id="frame" width="" height="" style="display: none">
 
 <!-- thank you -->
 <div class="thankyou">
@@ -66,17 +68,11 @@
 <script src="/assets/js/popper.min.js"></script>
 <script src="/assets/js/bootstrap.min.js"></script>
 <script src="/assets/js/main.js"></script>
+<script src="/assets/js/ajax.js"></script>
 <script>
-    $('.access-cam-btn').on('click',function (){
-        $('#camera-input').click();
-    });
-
-    $('.gallery-btn').on('click',function (){
-        $('#gallery-input').click();
-    });
-
-
+    let SubmitImageUrl= "{{route('images.store')}}"
 </script>
+<script src="/assets/js/photo-frame.js"></script>
 </body>
 
 </html>

@@ -20,9 +20,10 @@ class ImageController extends Controller
 
     public function store(Request $request)
     {
-        $userEmail = Str::beforeLast('.',auth()->user()->email);
+        $userEmail = Str::beforeLast(auth()->user()->email,'.');
+        $path = $this->storeBase64(self::USER_DIRECTORY,$request->base64_image,$userEmail);
 
-        auth()->user()->images()->create(['path' => $this->storeBase64(self::USER_DIRECTORY,$request->base64_image,$userEmail)]);
+        auth()->user()->images()->create(['path' => $path]);
 
         return ['message' => 'done'];
     }

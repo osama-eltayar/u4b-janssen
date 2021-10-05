@@ -13,8 +13,8 @@ trait HasFiles
 {
     public function storeFile(string $dirName , $file, $parent = NULL)
     {
-        $path = $dirName.'/';
-        $path.= $parent ? $parent->id : '' ;
+        $path = $dirName.'/'.$parent.'/';
+//        $path.= $parent ? $parent : '' ;
         $path = Storage::putFile($path, $file);
 
         return $path ;
