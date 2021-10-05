@@ -1,0 +1,122 @@
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+html,
+body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+body{
+    position: relative;
+    min-height: 100vh;
+    overflow-y: auto;
+    background-color: #FFF;
+}
+/* login page */
+
+.login-img{
+    width: 100%;
+    overflow: hidden;
+}
+.login-img img{
+    max-width: 100%;
+    width: 100%;
+}
+
+.form-container{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    margin: auto;
+}
+
+.login-form{
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    color: #c6c6c6;
+}
+.login-form .form-group{
+    width: 100%;
+    margin-bottom: .5rem;
+}
+.login-form .form-group label{
+    min-width: 110px;
+    font-family: 'GothamRnd-Book';
+    color: #c6c6c6;
+    font-size: 1rem;
+    text-align: right;
+}
+.login-form .form-group .input-container{
+    width: 100%;
+}
+.login-form .login-btn{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    max-width:200px;
+    margin: .5rem auto;
+    transform: translateX(30%);
+    padding: 0;
+    width: 55%;
+    box-shadow: none !important;
+    outline: none !important;
+}
+.login-form .login-btn img{
+    width:100%;
+}
+
+/* media */
+@media (max-width:1550px) {
+    .form-container{
+        margin-top: -4vw;
+    }
+}
+
+
+
+@media (max-width:992px) {
+    .login-form .form-group{
+        flex-wrap: wrap;
+    }
+    .login-form .form-group label{
+        width: 100%;
+        margin-bottom: .3rem;
+        text-align: left;
+    }
+    .login-form .form-group .input-container{
+        margin-left: 0 !important;
+    }
+    .login-form .login-btn{
+        transform: translateX(0);
+        margin: .3rem auto;
+    }
+}
+
+@media (max-width:600px) and (orientation:portrait){
+    .form-container{
+        margin-top: 0;
+    }
+    .login-img {
+        overflow: hidden;
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    .login-img img{
+        max-width: 130%;
+        width: 130%;
+    }
+}
