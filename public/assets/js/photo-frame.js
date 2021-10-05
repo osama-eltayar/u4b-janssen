@@ -18,11 +18,15 @@ $('#save').on('click',function (){
 function readURL(input)
 {
     if (input.files && input.files[0]) {
+        $('#save').attr('disabled' , false)
         let reader = new FileReader();
         reader.onload = function (e) {
             createCanvas(e.target.result)
         }
         reader.readAsDataURL(input.files[0]);
+    }else{
+        $('#save').attr('disabled' , true)
+
     }
 }
 
@@ -52,6 +56,7 @@ function submitPhoto()
     })
      .done(res => {
          download(base64)
+         $('.thankyou').show();
 
      })
      .fail(res => {

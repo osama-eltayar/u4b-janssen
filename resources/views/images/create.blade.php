@@ -40,7 +40,7 @@
                 <img src="/assets/images/gallery-btn.svg" class="img-fluid" alt="">
             </button>
         </div>
-        <button class="btn save-btn" id="save">
+        <button class="btn save-btn" id="save" disabled>
             <img src="/assets/images/save-btn.svg" class="img-fluid" alt="">
         </button>
 
