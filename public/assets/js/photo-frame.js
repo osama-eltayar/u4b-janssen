@@ -34,12 +34,14 @@ function createCanvas(base64)
 {
     let canvas = $('#canvas')[0];
     let frame = $('#frame')[0]
+    let map = $('#map')[0]
     let ctx = canvas.getContext('2d');
     let image = new Image();
     image.src = base64
     image.onload = function() {
         ctx.drawImage(frame, 0, 0,300,150);
         ctx.drawImage(image, 43, 19,214,112);
+        ctx.drawImage(map, 25, 100,25,30);
     };
 }
 

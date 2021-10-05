@@ -53,9 +53,10 @@
 
 </div>
 
-<input type="file" name="camera_input" style="visibility: hidden" id="camera-input" class="image-uploader" capture="user">
-<input type="file" name="gallery_input" style="visibility: hidden" id="gallery-input" class="image-uploader">
+<input type="file" name="camera_input" accept="image/*" style="visibility: hidden" id="camera-input" class="image-uploader" capture="user">
+<input type="file" name="gallery_input" accept="image/*" style="visibility: hidden" id="gallery-input" class="image-uploader">
 <img src="/assets/images/frame.png" id="frame" width="" height="" style="display: none">
+<img src="/assets/images/frame-map.png" id="map" width="" height="" style="display: none">
 
 <!-- thank you -->
 <div class="thankyou">
