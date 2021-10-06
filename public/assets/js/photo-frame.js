@@ -41,6 +41,12 @@ $('#canvas').mousemove(function (e){
         move = !move
         currentStartX += canMoveX && move ?   prevX - e.clientX : 0;
         currentStartY += canMoveY && move ? prevY - e.clientY : 0 ;
+        if (currentStartX < 0)
+            currentStartX = 0;
+
+        if (currentStartY < 0)
+            currentStartY = 0;
+
         if (canMoveX || canMoveY)
             reDrawCanvas()
     }
