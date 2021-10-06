@@ -24,33 +24,53 @@ $("#edit").on("click", function () {
     canEdit = true
 });
 
-$('#canvas').mousedown(function (e){
+$('#canvas').on('mousedown',function (e){
     isDragging = true
-    prevX = e.clientX ;
+    prevX = e.clientX  ;
     prevY = e.clientY ;
 })
 
-$('#canvas').mouseup(function (e){
+$('#canvas').on('touchstart',function (e){
+    isDragging = true
+    prevX = e.touches[0].clientX  ;
+    prevY = e.touches[0].clientY ;
+})
+
+$('#canvas').on('mouseup touchend',function (e){
     isDragging = false
     canEdit = false
 })
 
 $('#canvas').mousemove(function (e){
+
     if (isDragging && canEdit)
     {
-        move = !move
-        currentStartX += canMoveX && move ?   prevX - e.clientX : 0;
-        currentStartY += canMoveY && move ? prevY - e.clientY : 0 ;
-        if (currentStartX < 0)
-            currentStartX = 0;
-
-        if (currentStartY < 0)
-            currentStartY = 0;
-
-        if (canMoveX || canMoveY)
-            reDrawCanvas()
+        handleMove(e.clientX,e.clientY)
     }
 })
+
+$(window).on('touchmove',function (e){
+    if (canEdit && isDragging )
+    {
+        handleMove(e.touches[0].clientX,e.touches[0].clientY)
+    }
+})
+
+function handleMove(x,y)
+{
+    move = !move
+    currentStartX += canMoveX && move ?   prevX - x : 0;
+    currentStartY += canMoveY && move ? prevY - y : 0 ;
+
+    if (currentStartX < 0)
+        currentStartX = 0;
+
+    if (currentStartY < 0)
+        currentStartY = 0;
+
+    if (canMoveX || canMoveY)
+        reDrawCanvas()
+}
 
 function readURL(input) {
     if (input.files && input.files[0]) {

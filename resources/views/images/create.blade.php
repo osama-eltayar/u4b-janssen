@@ -28,7 +28,7 @@
     <div class="center-content">
         <div class="canvas-container">
             <canvas id="canvas" class="frame-canvas" width="764.5" height="882.3" ></canvas>
-            <img src="{{$userImage ? $userImage->url : '/assets/images/frame.png'}}" style="pointer-events: none;" class="img-fluid canvasimg" alt="">
+            <img src="{{$userImage ? $userImage->url : '/assets/images/frame.png'}}" style="pointer-events: none; touch-action: none" class="img-fluid canvasimg" alt="">
             <button class="btn edit-btn" id="edit" disabled>
                 <img src="/assets/images/edit-btn.svg" class="img-fluid" alt="">
             </button>
