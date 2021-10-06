@@ -28,14 +28,11 @@ $('#canvas').mousedown(function (e){
     isDragging = true
     prevX = e.clientX ;
     prevY = e.clientY ;
-    console.log('start');
 })
 
 $('#canvas').mouseup(function (e){
     isDragging = false
     canEdit = false
-    console.log('end');
-
 })
 
 $('#canvas').mousemove(function (e){
@@ -52,6 +49,7 @@ $('#canvas').mousemove(function (e){
 function readURL(input) {
     if (input.files && input.files[0]) {
         $("#save").attr("disabled", false);
+        $('.canvasimg').attr('src' ,$("#frame").attr('src') )
         let reader = new FileReader();
         reader.onload =  function (e) {
             let image = new Image();
@@ -59,6 +57,7 @@ function readURL(input) {
             image.onload = function () {
                 userImage = image
                 createFirstCanvas();
+                $("#edit").attr("disabled", false);
             }
         };
         reader.readAsDataURL(input.files[0]);
@@ -84,6 +83,7 @@ function createFirstCanvas(){
         imageHeight = 662 ;
         canMoveY = false
     }
+    ctx.clearRect(0,0,764.5,882.3)
     ctx.drawImage(userImage, 110, 110,imageWidth,imageHeight);
 }
 
