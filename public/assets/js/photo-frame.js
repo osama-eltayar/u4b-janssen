@@ -14,10 +14,6 @@ $("#save").on("click", function () {
     submitPhoto();
 });
 
-let canvasimgWidth = $(".canvasimg").width(),
-    canvasimgHeight = $(".canvasimg").height();
-
-console.log(canvasimgWidth, canvasimgHeight);
 function readURL(input) {
     if (input.files && input.files[0]) {
         $("#save").attr("disabled", false);

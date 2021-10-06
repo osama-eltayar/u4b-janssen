@@ -17,9 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::redirect('/','register');
 
 
 Route::get('register',[RegisterController::class, 'showRegisterForm'])->middleware('guest')->name('register');
@@ -30,3 +28,7 @@ Route::get('users/export',[UserController::class,'export'])->name('users.export'
 
 Route::get('/uploads/{path}',[UploadController::class,'show'])->name('uploads.show')->where('path','.*');
 Route::get('/downloads/{path}',[UploadController::class,'download'])->name('uploads.download')->where('path','.*');
+
+Route::get('migrate',function (){
+   \Illuminate\Support\Facades\Artisan::call('migrate --seed');
+});
