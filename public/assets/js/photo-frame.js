@@ -11,11 +11,12 @@ $(".image-uploader").on("change", function () {
 });
 
 $("#save").on("click", function () {
+    canEdit = false
     createCanvas() ;
     submitPhoto();
 });
 
-let canEdit, isDragging, prevX, prevY, canMoveX, canMoveY, userImage
+let canEdit, isDragging, prevX, prevY, canMoveX, canMoveY, userImage, maxX, maxY;
 let currentStartX = 0 ;
 let currentStartY = 0 ;
 let move = true
@@ -38,7 +39,7 @@ $('#canvas').on('touchstart',function (e){
 
 $('#canvas').on('mouseup touchend',function (e){
     isDragging = false
-    canEdit = false
+    // canEdit = false
 })
 
 $('#canvas').mousemove(function (e){
@@ -62,11 +63,19 @@ function handleMove(x,y)
     currentStartX += canMoveX && move ?   prevX - x : 0;
     currentStartY += canMoveY && move ? prevY - y : 0 ;
 
-    if (currentStartX < 0)
+    if (currentStartX > maxX)
+        currentStartX = maxX
+
+    if(currentStartY > maxY)
+        currentStartY = maxY
+
+    if (currentStartX < 0 || !canMoveX)
         currentStartX = 0;
 
-    if (currentStartY < 0)
+    if (currentStartY < 0 || !canMoveY)
         currentStartY = 0;
+
+
 
     if (canMoveX || canMoveY)
         reDrawCanvas()
@@ -97,6 +106,8 @@ function createFirstCanvas(){
     let ctx = canvas.getContext("2d");
     let imageWidth = userImage.width ;
     let imageHeight = userImage.height ;
+    maxX = imageWidth -544.3 ;
+    maxY = imageHeight -662 ;
     canMoveY = true
     canMoveX = true
     if (userImage.width < 544.3)
@@ -118,7 +129,7 @@ function reDrawCanvas()
     let canvas = $("#canvas")[0];
     let ctx = canvas.getContext("2d");
     ctx.clearRect(0,0,764.5,882.3)
-    ctx.drawImage(userImage, currentStartX, currentStartY,544.3,662,110,110,544.3,662);
+    ctx.drawImage(userImage, currentStartX, currentStartY,canMoveX ?  544.3 : userImage.width,canMoveY ?  662 : userImage.height,110,110,544.3,662);
 }
 
 function createCanvas() {
