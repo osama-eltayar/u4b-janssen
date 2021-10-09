@@ -28,8 +28,8 @@
     <div class="center-content">
         <div class="canvas-container">
             <canvas id="canvas" class="frame-canvas" width="764.5" height="882.3" ></canvas>
-            <img src="/assets/images/frame.svg" class="img-fluid canvasimg" alt="">
-            <button class="btn edit-btn">
+            <img src="{{$userImage ? $userImage->url : '/assets/images/frame.png'}}" style="pointer-events: none; touch-action: none" class="img-fluid canvasimg" alt="">
+            <button class="btn edit-btn" id="edit" disabled>
                 <img src="/assets/images/edit-btn.svg" class="img-fluid" alt="">
             </button>
         </div>
@@ -56,7 +56,7 @@
 
 <input type="file" name="camera_input" accept="image/*" style="display: none" id="camera-input" class="image-uploader" capture="user">
 <input type="file" name="gallery_input" accept="image/*" style="display: none" id="gallery-input" class="image-uploader">
-<img src="/assets/images/frame.svg" id="frame" width="" height="" style="display: none">
+<img src="/assets/images/frame.png" id="frame" width="" height="" style="display: none">
 <img src="/assets/images/frame-map.svg" id="map" width="" height="" style="display: none">
 
 <!-- thank you -->
