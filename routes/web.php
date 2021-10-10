@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
@@ -29,6 +30,8 @@ Route::get('users/export',[UserController::class,'export'])->name('users.export'
 Route::get('/uploads/{path}',[UploadController::class,'show'])->name('uploads.show')->where('path','.*');
 Route::get('/downloads/{path}',[UploadController::class,'download'])->name('uploads.download')->where('path','.*');
 
+Route::resource('games', GameController::class)->only('create','store','update');
+
 Route::get('migrate',function (){
-   \Illuminate\Support\Facades\Artisan::call('migrate --seed');
+   \Illuminate\Support\Facades\Artisan::call('migrate ');
 });
