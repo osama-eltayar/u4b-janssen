@@ -30,19 +30,20 @@ class GamesExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSiz
     public function headings(): array
     {
         return [
-            'name','email','Region','score','Remaining Time','Date Time'
+            'name','email','Region','score','Duration','Date Time'
         ];
     }
 
     public function map($row): array
     {
-        $remainingMinutes = $row->remainingDuration/60;
+        $remainingDuration =  300 - $row->remainingDuration ;
+        $remainingMinutes = $remainingDuration/60;
         return [
             $row->name,
             $row->email,
             optional($row->country)->name,
             $row->score. ' / 12',
-            (int)$remainingMinutes .':'.$row->remainingDuration%60,
+            (int)$remainingMinutes .':'.$remainingDuration%60,
             $row->created_at,
         ];
     }

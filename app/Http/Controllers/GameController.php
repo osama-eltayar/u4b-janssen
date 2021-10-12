@@ -33,7 +33,12 @@ class GameController extends Controller
     public function export()
     {
         $gamesQuery = Game::query()->with('country');
-        return (new GamesExport($gamesQuery))->download('game-users.xlsx');
+        return (new GamesExport($gamesQuery))->download('game-users.xlsx',
+                                                        NULL,
+                                                        [
+                                                            "Cache-Control" => " no-cache, must-revalidate",
+                                                            "Expires"       => " Sat, 26 Jul 1997 05:00:00 GMT"
+                                                        ]);
     }
 
 }
