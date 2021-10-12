@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\GameController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +31,37 @@ Route::get('users/export',[UserController::class,'export'])->name('users.export'
 Route::get('/uploads/{path}',[UploadController::class,'show'])->name('uploads.show')->where('path','.*');
 Route::get('/downloads/{path}',[UploadController::class,'download'])->name('uploads.download')->where('path','.*');
 
+Route::resource('games', GameController::class)->only('create','store','update');
+Route::get('games/export', [GameController::class,'export'])->name('games.export');
+
+Route::view('export','export');
+
 Route::get('migrate',function (){
-   \Illuminate\Support\Facades\Artisan::call('migrate --seed');
+   \Illuminate\Support\Facades\Artisan::call('migrate ');
 });
+
+Route::get('clear-cache',function (){
+    Artisan::call('cache:clear');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    return "Cache is cleared";
+});
+
+Route::get('seed/countries',function(){
+   \App\Models\Country::query()->truncate();
+    $countries = ['GCC', 'South Africa', 'JENA', 'TURKEY', 'NEMA', 'RUSSIA',];
+
+    foreach ($countries as $country)
+        \App\Models\Country::firstOrCreate(['name' => $country]);
+});
+
+//Route::get('reset-game',function (){
+//   \App\Models\Game::query()->truncate();
+//   return "done";
+//});
+
+Route::get('games',function (){
+   return \App\Models\Game::query()->with('country')->get()->toArray();
+});
+
