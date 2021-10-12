@@ -1,8 +1,15 @@
 let gameInterval, gameId ;
-let duration = 20 ;
+let duration = 300 ;
 let score = 0;
+const backgroundMusic = document.querySelector('#background');
+const correctMusic = document.querySelector('#correct');
+const winMusic = document.querySelector('#win');
+const loseMusic = document.querySelector('#lose');
 
 $(function (){
+    // $(window).on('resize',function (){
+    //     $('.memory-card').css('max-width', $('.memory-game').width() / 6)
+    // })
    $('.login-form').on('submit',function (e){
        e.preventDefault();
        handleLogin($(this))
@@ -28,12 +35,17 @@ function login(form)
 
 function handleLogin(form)
 {
+    startMusic()
+    console.log('login')
     login(form).done(function(res) {
         console.log(res)
         gameId = res.game_id ;
         showGame();
+        // $('.memory-card').css('max-width', $('.memory-game').width() / 6)
         hideLogin()
         startTimer();
+    }).fail((res) => {
+        console.log('failed')
     })
 }
 
@@ -74,36 +86,47 @@ function ticTic()
 function finishGame(win = true)
 {
     clearInterval(gameInterval);
+
     updateScore()
 
     if (win)
-        win()
+        setTimeout(function (){
+            backgroundMusic.pause()
+            winUser()
+        },3500);
+
     else
-        lose()
+        setTimeout(function (){
+            backgroundMusic.pause()
+            lose()
+        },2000);
+
 }
 
 function increaseScore()
 {
-    score += 10 ;
-    $('#score').text(score)
+    score += 1 ;
+    $('#score').text(' '+score)
 
-    if (score == 120 )
+    if (score == 12 )
         finishGame(true)
 }
 
-function win()
+function winUser()
 {
+    winMusic.play()
     $('.win-popup').css('display' , 'flex');
 }
 
 function lose()
 {
+    loseMusic.play()
     $('.gameover-popup').css('display' , 'flex');
 }
 
 function updateScore()
 {
-    let data = {score:score} ;
+    let data = {score:score,remainingDuration : duration} ;
     let url = submitScoreUrl.replace('xxx', gameId)
 
     return $.ajax({
@@ -129,8 +152,24 @@ function tryAgain()
         card.classList.remove("flip");
         card.style.opacity = null
     });
-    duration = 20 ;
+    duration = 300 ;
+
     startTimer();
+    startMusic();
     $('.game-popup').css('display','none')
+
+}
+
+function startMusic()
+{
+    correctMusic.play()
+    correctMusic.pause()
+    winMusic.play()
+    winMusic.pause()
+    loseMusic.play()
+    loseMusic.pause()
+    backgroundMusic.play()
+    backgroundMusic.loop = true;
+    loseMusic.pause()
 
 }

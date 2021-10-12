@@ -46,32 +46,39 @@ body{
 .input-field{
   max-width: 78%;
   margin:auto;
+  background-image: url(/game-assets/images/input-bg.svg) !important;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 .form-group{
   position: relative;
   width: 100%;
   margin-bottom: 1rem;
-  height: fit-content;
   display: flex;
 }
 
 .form-group img{
   max-width: 100%;
 }
+.game-name img{
+  display:block;
+}
 .form-group input{
-  position: absolute;
-  height: 100%;
-  left: 0;
-  right: 0;
   width: 100%;
   padding: 0 10%;
   background: transparent;
   border: 0;
   outline: 0;
   font-size: 1.3rem;
+  line-height: 3.2;
   color: #FFF;
   padding-bottom: 2%;
   font-family: 'Roboto-Bold';
+  background-image: url('/game-assets/images/input-bg.svg') !important;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 ::-webkit-input-placeholder { /* Edge */
@@ -114,8 +121,9 @@ select:-webkit-autofill:focus {
   border: none;
   -webkit-text-fill-color: #FFF;
   -webkit-box-shadow: 0 0 0px 1000px transparent inset;
-  transition: background-color 5000s ease-in-out 0s;
+  /* transition: background-color 5000s ease-in-out 0s; */
   transition-delay: 400000s;
+  background-image: url(/game-assets/images/input-bg.svg) !important;
 }
 
 /* width */
@@ -188,12 +196,15 @@ select:-webkit-autofill:focus {
 
 /* The container must be positioned relative: */
 .custom-select {
-  position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
-  margin: auto;
+  margin:  auto;
   width: 100%;
+  box-shadow: none;
+  border: 0;
+  outline: 0;
+  background: none;
 }
 
 .custom-select select {
@@ -213,11 +224,12 @@ select:-webkit-autofill:focus {
   width: 100%;
   display: flex;
   align-items: center;
-  padding: .5rem 10%;
+  padding: 0 10%;
+  line-height: 3.2;
 }
 .select-selected {
   background-color: transparent;
-  position: absolute;
+  /* position: absolute; */
   top: 0;
   bottom: 0;
   left: 0;
@@ -225,6 +237,12 @@ select:-webkit-autofill:focus {
   color: #ccc;
   font-size: 1.3rem;
   font-family: 'Roboto-Bold';
+  background-image: url(/game-assets/images/input-bg.svg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: 0;
+  box-shadow: none;
 }
 
 /* Style the arrow inside the select element: */
@@ -294,10 +312,16 @@ select:-webkit-autofill:focus {
         max-width: 270px;
         width: 45%;
     }
+    .game-name{
+      margin-bottom: 5px;
+      padding-top: 1rem;
+    }
     .select-items div,
     .select-selected,
     .form-group input{
         font-size: 1rem;
+        line-height: 1.2;
+        padding: 5px 10%;
     }
     
     ::-webkit-input-placeholder { /* Edge */    
@@ -321,6 +345,11 @@ select:-webkit-autofill:focus {
     .login-form{
         width: 95%;
         max-width: 450px;
+    }
+    .select-items div, .select-selected, .form-group input {
+        font-size: 1rem;
+        line-height: 2;
+        padding: 5px 10%;
     }
     
 }

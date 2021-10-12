@@ -5,6 +5,11 @@ let hasFlippedCard = false;
 let lockBoard = false;
 let firstCard, secondCard;
 
+$(function (){
+    cards.forEach((card) => card.addEventListener("click", flipCard));
+
+})
+
 function flipCard() {
   if (lockBoard) return;
   if (this === firstCard) return;
@@ -29,6 +34,7 @@ function checkForMatch() {
 }
 
 function disableCards() {
+    correctMusic.play()
   firstCard.removeEventListener("click", flipCard);
   secondCard.removeEventListener("click", flipCard);
   lockBoard = true;
@@ -70,7 +76,6 @@ function resetBoard() {
   });
 })();
 
-cards.forEach((card) => card.addEventListener("click", flipCard));
 
 
 

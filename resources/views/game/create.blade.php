@@ -29,21 +29,17 @@
                 </div>
 
                 <div class="form-group input-field">
-                    <img src="/game-assets/images/input-bg.svg" alt="" />
 
                     <input id="fullname" name="name"  required placeholder="User Name" type="text" />
                 </div>
 
                 <div class="form-group input-field">
-                    <img src="/game-assets/images/input-bg.svg" alt="" />
-
                     <input id="email" type="email" required placeholder="Email"  name="email"/>
                 </div>
                 <div class="form-group input-field">
-                    <img src="/game-assets/images/input-bg.svg" alt="" />
                     <div class="custom-select">
                         <select name="country_id" required>
-                            <option value=""  >Country</option>
+                            <option  >Region</option>
                             @foreach($countries as $country)
                                 <option value="{{$country->id}}">{{$country->name}}</option>
                             @endforeach
@@ -74,8 +70,9 @@
 <main id="game" class="game-page">
     <div class="score-container">
         <img src="/game-assets/images/game/score-img.svg" alt="" class="img-fluid">
-        <div id="score" class="score">
-            0
+        <div  class="score">
+            12 /
+            <span id="score"> 0</span>
         </div>
     </div>
     <div class="time-container">
@@ -223,6 +220,19 @@
         </div>
     </section>
 </main>
+
+<audio id="background">
+    <source src="/game-assets/sounds/background.mp3" type="audio/mpeg">
+</audio>
+<audio id="correct">
+    <source src="/game-assets/sounds/correct.mp3" type="audio/mpeg">
+</audio>
+<audio id="win">
+    <source src="/game-assets/sounds/win.mp3" type="audio/mpeg">
+</audio>
+<audio id="lose">
+    <source src="/game-assets/sounds/lose.mp3" type="audio/mpeg">
+</audio>
 
 
 <div id="loader-wrapper">

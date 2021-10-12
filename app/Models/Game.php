@@ -16,7 +16,7 @@ class Game extends Model
     * @var array
     */
     protected $fillable = [
-        'name', 'email', 'country_id', 'score'
+        'name', 'email', 'country_id', 'score','remainingDuration'
     ];
 
     //########################################### Constants ################################################

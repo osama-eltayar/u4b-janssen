@@ -10,4 +10,10 @@ class Country extends Model
     use HasFactory;
 
     protected $fillable = ['name'];
+
+    public function games()
+    {
+        return $this->hasMany(Game::class);
+    }
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\GamesExport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GameRequest;
 use App\Models\Country;
@@ -25,7 +26,14 @@ class GameController extends Controller
 
     public function update(Game $game,Request $request)
     {
-        $game->update(['score' => $request->score]);
+        $game->update(['score' => $request->score,'remainingDuration'=>$request->remainingDuration]);
         return response([]);
     }
+
+    public function export()
+    {
+        $gamesQuery = Game::query()->with('country');
+        return (new GamesExport($gamesQuery))->download('game-users.xlsx');
+    }
+
 }

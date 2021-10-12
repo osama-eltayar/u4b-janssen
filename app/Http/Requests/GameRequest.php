@@ -24,7 +24,9 @@ class GameRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required'],
+            'email' => ['required','email'],
+            'country_id' => ['required'],
         ];
     }
 }
