@@ -25,6 +25,6 @@ class ImageController extends Controller
 
         auth()->user()->images()->create(['path' => $path]);
 
-        return ['message' => 'done'];
+        return ['message' => 'done','redirect' => route('count-down')];
     }
 }

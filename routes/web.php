@@ -28,6 +28,8 @@ Route::post('register',[RegisterController::class, 'register'])->middleware('gue
 Route::resource('images',ImageController::class)->only('create','store')->middleware('auth');
 Route::get('users/export',[UserController::class,'export'])->name('users.export');
 
+Route::view('count-down','auth.count-down')->name('count-down')->middleware('auth');
+
 Route::get('/uploads/{path}',[UploadController::class,'show'])->name('uploads.show')->where('path','.*');
 Route::get('/downloads/{path}',[UploadController::class,'download'])->name('uploads.download')->where('path','.*');
 
@@ -37,7 +39,10 @@ Route::get('games/export', [GameController::class,'export'])->name('games.export
 Route::view('export','export');
 
 Route::get('migrate',function (){
-   \Illuminate\Support\Facades\Artisan::call('migrate ');
+    \App\Models\User::query()->truncate();
+    \App\Models\Image::query()->truncate();
+   \Illuminate\Support\Facades\Artisan::call('migrate --seed');
+   return response('done');
 });
 
 Route::get('clear-cache',function (){

@@ -11,9 +11,14 @@ class UserController extends Controller
     public function export()
     {
         $users = User::query()
-                     ->with(['country','aspiration','images' => function($query){
+                     ->with(['country','aspiration','therapy','images' => function($query){
                          $query->oldest();
                      }]);
-        return (new UsersExport($users))->download('users.xlsx');
+        return (new UsersExport($users))->download('users.xlsx',
+                                                   NULL,
+                                                   [
+                                                       "Cache-Control" => " no-cache, must-revalidate",
+                                                       "Expires"       => " Sat, 26 Jul 1997 05:00:00 GMT"
+                                                   ]);
     }
 }
