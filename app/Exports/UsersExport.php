@@ -30,7 +30,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSiz
     public function headings(): array
     {
         return [
-            'name','email','country','aspiration','images'
+            'Name','Email','Region','Therapy Area','Aspiration','Images'
         ];
     }
 
@@ -40,6 +40,7 @@ class UsersExport implements FromQuery, WithHeadings, WithMapping, ShouldAutoSiz
             $row->name,
             $row->email,
             $row->country->name,
+            $row->therapy->name,
             $row->aspiration->name,
             $row->images->pluck('download')->join(' , ')
         ];

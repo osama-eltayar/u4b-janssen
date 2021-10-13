@@ -153,7 +153,8 @@ function submitPhoto() {
     })
         .done((res) => {
             download(base64);
-            $(".thankyou").show();
+            if (res.redirect)
+                redirect(res.redirect)
         })
         .fail((res) => {})
         .always(() => {});

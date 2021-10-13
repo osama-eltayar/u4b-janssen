@@ -46,7 +46,7 @@
 
         <!-- country -->
         <div class="form-group d-flex align-items-start justify-content-start">
-            <label for="country">Country</label>
+            <label for="country">Region</label>
             <div class="ms-2 input-container">
                 <select class="form-select" aria-label="Default select example" id="country" name="country_id" required>
                     <option selected></option>
@@ -56,6 +56,21 @@
                 </select>
             </div>
             @error('country_id')
+            <span class="">{{$message}}</span>
+            @enderror
+        </div>
+
+        <div class="form-group d-flex align-items-start justify-content-start">
+            <label for="aspiration">Therapy</label>
+            <div class="ms-2 input-container">
+                <select class="form-select" aria-label="Default select example" id="therapy" name="therapy_id" required>
+                    <option selected></option>
+                    @foreach($therapies as $therapy)
+                        <option value="{{$therapy->id}}">{{$therapy->name}}</option>
+                    @endforeach
+                </select>
+            </div>
+            @error('therapy_id')
             <span class="">{{$message}}</span>
             @enderror
         </div>

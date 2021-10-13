@@ -14,7 +14,7 @@ class CountrySeeder extends Seeder
      */
     public function run()
     {
-        $countries = ['country1','country2','country3'];
+        $countries = ['GCC', 'South Africa', 'JENA', 'TURKEY', 'NEMA', 'RUSSIA',];
 
         foreach ($countries as $country)
             Country::firstOrCreate(['name' => $country]);

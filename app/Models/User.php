@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'country_id',
         'aspiration_id',
+        'therapy_id',
         'ip'
     ];
 
@@ -54,6 +55,11 @@ class User extends Authenticatable
     public function aspiration()
     {
         return $this->belongsTo(Aspiration::class);
+    }
+
+    public function therapy()
+    {
+        return $this->belongsTo(Therapy::class);
     }
 
     public function images()

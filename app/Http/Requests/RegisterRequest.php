@@ -28,6 +28,7 @@ class RegisterRequest extends FormRequest
             'email' => ['required','email'],
             'country_id' => ['required','exists:countries,id'],
             'aspiration_id' => ['required','exists:aspirations,id'],
+            'therapy_id' => ['required','exists:therapies,id'],
         ];
     }
 }
