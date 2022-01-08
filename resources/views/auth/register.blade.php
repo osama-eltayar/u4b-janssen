@@ -27,21 +27,21 @@
             <label for="username">Username</label>
             <div class="ms-2 input-container">
                 <input type="text" class="form-control" id="username" name="name" required>
+                @error('name')
+                <span class="">{{$message}}</span>
+                @enderror
             </div>
-            @error('name')
-            <span class="">{{$message}}</span>
-            @enderror
         </div>
 
         <!-- email -->
         <div class="form-group d-flex align-items-start justify-content-start">
             <label for="email">Email</label>
             <div class="ms-2 input-container">
-                <input type="text" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" required>
+                @error('email')
+                <span class="">{{$message}}</span>
+                @enderror
             </div>
-            @error('email')
-            <span class="">{{$message}}</span>
-            @enderror
         </div>
 
         <!-- country -->
@@ -54,14 +54,14 @@
                     <option value="{{$country->id}}">{{$country->name}}</option>
                     @endforeach
                 </select>
+                @error('country_id')
+                <span class="">{{$message}}</span>
+                @enderror
             </div>
-            @error('country_id')
-            <span class="">{{$message}}</span>
-            @enderror
         </div>
 
         <div class="form-group d-flex align-items-start justify-content-start">
-            <label for="aspiration">Therapy</label>
+            <label for="therapy">Therapy</label>
             <div class="ms-2 input-container">
                 <select class="form-select" aria-label="Default select example" id="therapy" name="therapy_id" required>
                     <option selected></option>
@@ -69,15 +69,15 @@
                         <option value="{{$therapy->id}}">{{$therapy->name}}</option>
                     @endforeach
                 </select>
+                @error('therapy_id')
+                <span class="">{{$message}}</span>
+                @enderror
             </div>
-            @error('therapy_id')
-            <span class="">{{$message}}</span>
-            @enderror
         </div>
 
         <!-- aspiration -->
         <div class="form-group d-flex align-items-start justify-content-start">
-            <label for="aspiration">Aspiration</label>
+            <label for="aspiration">Career Aspiration</label>
             <div class="ms-2 input-container">
                 <select class="form-select" aria-label="Default select example" id="aspiration" name="aspiration_id" required>
                     <option selected></option>
@@ -85,10 +85,10 @@
                     <option value="{{$aspiration->id}}">{{$aspiration->name}}</option>
                     @endforeach
                 </select>
+                @error('aspiration_id')
+                <span class="">{{$message}}</span>
+                @enderror
             </div>
-            @error('aspiration_id')
-            <span class="">{{$message}}</span>
-            @enderror
         </div>
 
         <!-- login button -->

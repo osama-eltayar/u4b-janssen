@@ -53,12 +53,10 @@ Route::get('clear-cache',function (){
     return "Cache is cleared";
 });
 
-Route::get('seed/countries',function(){
-   \App\Models\Country::query()->truncate();
-    $countries = ['GCC', 'South Africa', 'JENA', 'TURKEY', 'NEMA', 'RUSSIA',];
-
-    foreach ($countries as $country)
-        \App\Models\Country::firstOrCreate(['name' => $country]);
+Route::get('seed/others',function(){
+   $aspiration = 'Others';
+    \App\Models\Aspiration::firstOrCreate(['name' => $aspiration]);
+    \App\Models\Country::firstOrCreate(['name' => $aspiration]);
 });
 
 //Route::get('reset-game',function (){

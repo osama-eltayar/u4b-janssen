@@ -14,7 +14,8 @@ class AspirationSeeder extends Seeder
      */
     public function run()
     {
-        $aspirations = ['aspiration1','aspiration2','aspiration3'];
+        $aspirations = ['EMEA Medical Advisor','EMEA Medical Program Lead',
+                  'Regional Role Emerging Markets','Medical Director ','MSL Manager/Medical Manager','HEMAR Manager','EMEA SKM','Commercial Lead/CV'];
 
         foreach ($aspirations as $aspiration)
             Aspiration::firstOrCreate(['name' => $aspiration]);

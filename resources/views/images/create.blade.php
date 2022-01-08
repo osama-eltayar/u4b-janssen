@@ -12,7 +12,14 @@
     <link rel="stylesheet" href="/assets/css/loading.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
+    <style>
+        /*.active-button{*/
+        /*    filter: grayscale(10%);;*/
+        /*}*/
+        .active-button:focus{
+            filter: grayscale(90%);;
+        }
+    </style>
     <title>U4P</title>
 </head>
 
@@ -29,10 +36,18 @@
         <div class="canvas-container">
             <canvas id="canvas" class="frame-canvas" width="764.5" height="882.3" ></canvas>
             <img src="{{$userImage ? $userImage->url : '/assets/images/frame.png'}}" style="pointer-events: none; touch-action: none" class="img-fluid canvasimg" alt="">
-            <button class="btn edit-btn" id="edit" disabled>
-                <img src="/assets/images/edit-btn.svg" class="img-fluid" alt="">
-            </button>
         </div>
+        <div class="action-btns">
+            <strong style="cursor: pointer" onclick="adjustRange(false)">-</strong>
+            <input type="range"  class="form-range" min="0" max="100" disabled  step="1"  id="zoom-range">
+            <strong style="cursor: pointer" onclick="adjustRange(true)">+</strong>
+
+        </div>
+        <button class="btn edit-btn " id="edit" disabled >
+            <img src="/assets/images/adjust-btn.svg"  class="img-fluid " alt="">
+
+        </button>
+
         <div class="action-btns">
             <button class="btn access-cam-btn">
                 <img src="/assets/images/access-cam-btn.svg" class="img-fluid" alt="">

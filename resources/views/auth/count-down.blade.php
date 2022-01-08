@@ -60,7 +60,7 @@
         <button class="btn join-btn" id="join">
             <img src="/assets/images/countdown/join-btn.svg" class="img-fluid" alt="">
         </button>
-        <a class="btn frame-link" href="http://u4b-janssen.klontiaonline.com/images/create">
+        <a class="btn frame-link" href="{{route('images.create')}}">
             <img src="/assets/images/countdown/frame-link.svg" class="img-fluid" alt="">
         </a>
     </div>

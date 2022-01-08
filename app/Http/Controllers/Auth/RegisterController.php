@@ -14,7 +14,7 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
-        $aspirations = Aspiration::all();
+        $aspirations = Aspiration::query()->where('name','!=','Others')->get();
         $countries   = Country::all();
         $therapies   = Therapy::all();
 
@@ -29,6 +29,7 @@ class RegisterController extends Controller
                             ['ip' => $registerRequest->ip()]);
 
         auth()->login($user);
+
 
         if ($user->images()->exists())
             return redirect('count-down');

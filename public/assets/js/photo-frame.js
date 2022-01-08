@@ -16,7 +16,10 @@ $("#save").on("click", function () {
     submitPhoto();
 });
 
-let canEdit, isDragging, prevX, prevY, canMoveX, canMoveY, userImage, maxX, maxY;
+const InlineWidth = 548.3 ;
+const InlineHeight = 664 ;
+
+let canEdit, isDragging, prevX, prevY, userImage, maxX, maxY;
 let currentStartX = 0 ;
 let currentStartY = 0 ;
 let move = true
@@ -50,6 +53,13 @@ $('#canvas').mousemove(function (e){
     }
 })
 
+$('#zoom-range').on('change',function (){
+    let zoomRatio =   $('#zoom-range').val() / 50
+    maxX = userImage.width > InlineWidth / zoomRatio ? userImage.width - InlineWidth / zoomRatio : 0
+    maxY = userImage.height >  InlineHeight / zoomRatio ? userImage.height -  InlineHeight / zoomRatio : 0
+    reDrawCanvas() ;
+})
+
 $(window).on('touchmove',function (e){
     if (canEdit && isDragging )
     {
@@ -60,25 +70,9 @@ $(window).on('touchmove',function (e){
 function handleMove(x,y)
 {
     move = !move
-    currentStartX += canMoveX && move ?   prevX - x : 0;
-    currentStartY += canMoveY && move ? prevY - y : 0 ;
-
-    if (currentStartX > maxX)
-        currentStartX = maxX
-
-    if(currentStartY > maxY)
-        currentStartY = maxY
-
-    if (currentStartX < 0 || !canMoveX)
-        currentStartX = 0;
-
-    if (currentStartY < 0 || !canMoveY)
-        currentStartY = 0;
-
-
-
-    if (canMoveX || canMoveY)
-        reDrawCanvas()
+    currentStartX -= move ?   (x - prevX) / 4 : 0;
+    currentStartY -= move ? (y - prevY) / 4 : 0 ;
+    reDrawCanvas()
 }
 
 function readURL(input) {
@@ -92,7 +86,8 @@ function readURL(input) {
             image.onload = function () {
                 userImage = image
                 createFirstCanvas();
-                $("#edit").attr("disabled", false);
+                $("#edit").attr("disabled", false).addClass('active-button');
+                $("#zoom-range").attr("disabled", false).val(50);
             }
         };
         reader.readAsDataURL(input.files[0]);
@@ -106,30 +101,30 @@ function createFirstCanvas(){
     let ctx = canvas.getContext("2d");
     let imageWidth = userImage.width ;
     let imageHeight = userImage.height ;
-    maxX = imageWidth -544.3 ;
-    maxY = imageHeight -662 ;
-    canMoveY = true
-    canMoveX = true
-    if (userImage.width < 544.3)
+    maxX = imageWidth > InlineWidth ?  imageWidth - InlineWidth : 0 ;
+    maxY = imageHeight > InlineHeight ? imageHeight -InlineHeight : 0;
+    if (userImage.width < InlineWidth)
     {
-            imageWidth = 544.3 ;
-            canMoveX = false
+            imageWidth = InlineWidth ;
     }
-    if (userImage.height < 662)
+    if (userImage.height < InlineHeight)
     {
-        imageHeight = 662 ;
-        canMoveY = false
+        imageHeight = InlineHeight ;
     }
     ctx.clearRect(0,0,764.5,882.3)
-    ctx.drawImage(userImage, 110, 110,imageWidth,imageHeight);
+    ctx.drawImage(userImage, 108, 110,imageWidth,imageHeight);
 }
 
 function reDrawCanvas()
 {
+    fixCurrentStart()
+    let zoomRatio =   $('#zoom-range').val() / 50
     let canvas = $("#canvas")[0];
     let ctx = canvas.getContext("2d");
+    let widthTargeted =  InlineWidth / zoomRatio <= userImage.width ?   InlineWidth / zoomRatio : userImage.width
+    let heightTargeted = InlineHeight / zoomRatio <= userImage.height ?  InlineHeight / zoomRatio : userImage.height
     ctx.clearRect(0,0,764.5,882.3)
-    ctx.drawImage(userImage, currentStartX, currentStartY,canMoveX ?  544.3 : userImage.width,canMoveY ?  662 : userImage.height,110,110,544.3,662);
+    ctx.drawImage(userImage, currentStartX, currentStartY,widthTargeted  ,heightTargeted  ,108,110,InlineWidth,InlineHeight);
 }
 
 function createCanvas() {
@@ -165,4 +160,29 @@ function download(base64) {
     link.download = "janssen.png";
     link.href = base64;
     link.click();
+}
+
+function fixCurrentStart()
+{
+    if (currentStartX > maxX)
+        currentStartX = maxX
+
+    if(currentStartY > maxY)
+        currentStartY = maxY
+
+    if (currentStartX < 0 )
+        currentStartX = 0;
+
+    if (currentStartY < 0 )
+        currentStartY = 0;
+}
+
+function adjustRange(increase)
+{
+    if (canEdit)
+    {
+        let oldValue = $('#zoom-range').val()
+        let newValue = increase ?  Number(oldValue)+1 : oldValue-1
+        $('#zoom-range').val(newValue).change();
+    }
 }
